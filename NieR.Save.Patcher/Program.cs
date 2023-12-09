@@ -145,7 +145,10 @@ namespace NieR.Save.Patcher
 
 		private static void Batch(string path, UInt64 steamID)
 		{
-
+			FileData = LoadFileData(path);
+			CreateOldFile(path);
+			FileData = PatchFileData(FileData, steamID);
+			File.WriteAllBytes(path, FileData);
 		}
 
 		private static void ExitWithError(string e = "An error has occured.")
